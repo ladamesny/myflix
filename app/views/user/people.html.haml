@@ -1,0 +1,22 @@
+%section.people
+  %header
+    %h2 People I Follow
+  %table.table
+    %thead
+      %tr
+        %th(width="30%")
+        %th(width="20%") Videos in Queue
+        %th(width="20%") Followers
+        %th(width="30%") Unfollow
+    %tbody
+      - current_user.leaders.each do |user|
+        %tr
+          %td
+            = link_to "" do
+              %img(src="user.gravatar_img")
+            = link_to user.name, user
+          %td.extra-padding =user.queue.count
+          %td.extra-padding =user.followers
+          %td.extra-padding
+            = link_to "", unfollow_user_path(user) do
+              %i.glyphicon.glyphicon-remove

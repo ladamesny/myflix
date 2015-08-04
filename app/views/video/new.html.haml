@@ -1,0 +1,38 @@
+%section.admin_add_video
+  .container
+    .row
+      .col-md-10.col-md-offset-1
+        = form_for(@video), class: "form-horizontal" do |f|
+          %ul.nav.nav-tabs
+            %li
+              = link_to "Recent Payments", "/ui/admin_views_payments"
+            %li.active
+              = link_to "Add a New Video"
+          %br
+          %fieldset
+            .form-group
+              = f.label "Title", class: "control-label col-sm-3"
+             .col-sm-3
+                = f.text class: "form-control"
+            .form-group
+              = f.label "Category", class: "control-label col-sm-3"
+              .col-sm-6
+                %select.form-control
+            .form-group
+              = f.label "Description", class: "control-label col-sm-3"
+              .col-sm-6
+                = f.textarea class: "form-control", html { rows: 8 }
+            .form-group
+              = f.label "Large Cover", class: "control-label col-sm-3"
+              .col-sm-6
+                %col.btn.btn-file
+                  = f.file class: "form-control"
+            .form-group
+              = f.label "Small Cover" class: "control-label col-sm-3"
+              .col-sm-6
+                %col.btn.btn-file
+                  = f.file class: "form-control"
+
+          %fieldset.actions.form-group
+            .col-sm-6.col-md-offset-3
+              = f.submit "Add Video", class: "btn btn-default"

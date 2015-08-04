@@ -1,0 +1,38 @@
+%section.user.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      %article
+        %header
+          = link_to "" do
+            %img(src="@user.gravatar_url")
+          %h2 ="#{@user.name}'s video collections (#{@user.video_collection.count})"
+          = link_to "Follow", follow_user_path(@user)
+        %table.table
+          %thead
+            %tr
+              %th(width="30%") Video Title
+              %th(width="15%") Genre
+          %tbody
+            - @user.video_collection.each do |video|
+              %tr
+                %td
+                  = link_to video.title
+                %td
+                  = link_to video.genre
+
+%section.user_reviews.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      %header
+        %h3 ="#{@user.name}'s Reviews (#{@user.reviews.count})"
+      %ul
+        - @user.reviews.each do |review|
+          %article.review
+            %li.row
+              .col-sm-2
+                %p
+                  = link_to "" do
+                    %img(src="#{review.cover_img}")
+                %col = "Rating:  #{review.rating}/ 5"
+              .col-sm-8
+                %p =review.review_summary
