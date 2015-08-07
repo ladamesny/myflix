@@ -5,6 +5,7 @@ class CreateVideos < ActiveRecord::Migration
       t.text  :description
       t.text :small_img
       t.text :large_img
+      t.integer :category_id
       t.timestamps
     end
   end

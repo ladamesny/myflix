@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20150807035824) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "catagories", force: true do |t|
+  create_table "categories", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20150807035824) do
     t.text     "description"
     t.text     "small_img"
     t.text     "large_img"
+    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
