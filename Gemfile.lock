@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/thoughtbot/shoulda-matchers.git
+  revision: a3fb06c369c2b5e96831cb2c6c8532de8e2f0e62
+  specs:
+    shoulda-matchers (3.0.0.rc1)
+      activesupport (>= 4.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -168,5 +175,6 @@ DEPENDENCIES
   rails_12factor
   rspec-rails (= 2.99)
   sass-rails
+  shoulda-matchers!
   thin
   uglifier
