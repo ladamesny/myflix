@@ -4,6 +4,7 @@ class Video < ActiveRecord::Base
   validates_presence_of :title, :description
 
   def self.search_by_title term
-    self.where("title LIKE ?", "%#{term}%") || []
+    return [] if term.blank?
+    where("title LIKE ?", "%#{term}%").order("created_at DESC")
   end
 end
