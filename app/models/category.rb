@@ -5,6 +5,5 @@ class Category < ActiveRecord::Base
 
   def recent_videos
     videos.limit(6)
-    # Video.where("category = ?", self.name ).order(created_at: :desc).limit(6)
   end
 end
