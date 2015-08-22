@@ -1,0 +1,41 @@
+%section.register.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      = bootstrap_form_for @user, html: { class: "sign_in" } do |f|
+        %header.col-sm-offset-4
+          %h1 Register
+        %fieldset.col-sm-offset-4
+          .form-group
+            .row
+              .col-sm-6
+                = f.email_field :email, label: "Email Address"
+          .form-group
+            .row
+              .col-sm-6
+                = f.password_field :password
+          .form-group
+            .row
+              .col-sm-6
+                = f.text_field :username, label: "User name"
+          .form-group
+            .row
+              .col-sm-6
+                = f.text_field :full_name, label: "Full Name"
+        / %fieldset.credit_card
+        /   .form-group
+        /     %label.control-label.col-sm-2 Credit Card Number
+        /     .col-sm-6
+        /       %input.form-control(type="text")
+        /   .form-group
+        /     %label.control-label.col-sm-2 Security Code
+        /     .col-sm-6
+        /       %input.form-control(type="text")
+        /   .form-group
+        /     %label.control-label.col-sm-2 Expiration
+        /     .col-sm-3
+        /       = select_month(Date.today, {add_month_numbers: true},  class: 'form-control')
+        /     .col-sm-2
+        /       = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, class: 'form-control')
+        %fieldset.actions.control-group.controls.col-sm-offset-4
+          %input(type="submit" value="Sign Up" class="btn btn-primary")
+          or #{link_to "Already have a login?", sign_in_path}
