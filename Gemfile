@@ -11,6 +11,8 @@ gem 'pg'
 gem 'rails', '4.1.1'
 gem 'sass-rails'
 gem 'uglifier'
+gem 'fabrication'
+gem 'faker'
 
 group :development do
   gem 'thin'
