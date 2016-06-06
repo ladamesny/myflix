@@ -1,5 +1,6 @@
 class VideosController < ApplicationController
   before_action :set_video, only: [:show]
+  before_action :prepare_review_values, only: [:show]
   before_action :require_user
 
   def index
@@ -7,6 +8,7 @@ class VideosController < ApplicationController
   end
 
   def show
+    @review = Review.new
   end
 
   def search
@@ -21,6 +23,16 @@ class VideosController < ApplicationController
 
   def set_video
     @video = Video.find(params[:id])
+  end
+
+  def prepare_review_values
+    @reivew_values = [
+      { value: 1, label: '1 Star' },
+      { value: 2, label: '2 Star' },
+      { value: 3, label: '3 Star' },
+      { value: 4, label: '4 Star' },
+      { value: 5, label: '5 Star' }
+    ]
   end
 
   # def require_creator

@@ -43,5 +43,17 @@ describe Video do
       expect(Video.search_by_title("")).to eq([])
     end
   end
+
+  describe '#average_rating' do
+    it 'returns average rating for movie' do
+      video = Fabricate(:video)
+      Fabricate(:review, video: video, rating: 4)
+      Fabricate(:review, video: video, rating: 3)
+      Fabricate(:review, video: video, rating: 2)
+
+      expect(video.average_rating).to eq((4+3+2)/3)
+
+    end
+  end
 end
 
