@@ -25,11 +25,11 @@ describe '#search_by_title' do
     expect(Video.search_by_title("man")).to eq([batman])
   end
 
-  # it "returns an array of one video when it finds a lowercase match" do
-  #   batman = Video.create(title: "Batman", description: "First Batman")
-  #   Video.create(title: "The Dark Knight", description: "Best Batman")
-  #   expect(Video.search_by_title("batman")).to eq([batman])
-  # end
+  it "returns an array of one video when it finds a lowercase match" do
+    batman = Video.create(title: "Batman", description: "First Batman")
+    Video.create(title: "The Dark Knight", description: "Best Batman")
+    expect(Video.search_by_title("batman")).to eq([batman])
+  end
 
   it "should returns an array of all matches ordered by create_at" do
     batman = Video.create(title: "Batman", description: "First Batman")
