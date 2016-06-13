@@ -1,0 +1,12 @@
+= form_for review do |f|
+  .row
+    .col.sm-3.col-sm-offset-1
+      = f.collection_select(:rating, :review_id, review_values, :value, :label, prompt: false)
+  .row
+    .col.sm-6.col-sm-offset-1
+      %p ="Write a Review"
+      = f.text_field :body, class: 'form-control'
+  .row
+    .col.sm-6.col-sm-offset-1
+      = f.submit
+      %button="Cancel", class: 'cancel'

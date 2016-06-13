@@ -12,6 +12,7 @@ documentaries = Category.create(name: "Documentaries")
 romance = Category.create(name: "Romance")
 action = Category.create(name: "Action")
 thrillers = Category.create(name: "Thrillers")
+user = User.create(email: "adames.larry@gmail.com", full_name: "Larry Adames", username: 'ladamesny', password: "Panchita1")
 puts "Creating videos"
 Category.all.each do |category|
   future = Video.create(title: "Futurama", description: "Pizza boy Philip J. Fry awakens in the 31st century after 1,000 years of cryogenic preservation in this animated series. After he gets a job at an interplanetary delivery service, Fry embarks on ridiculous escapades to make sense of his predicament.", small_img: "futurama.jpg", large_img: "futurama.jpg")
@@ -47,4 +48,5 @@ Category.all.each do |category|
   the_dark_knight.save!
   the_dark_knight_rises.save!
   batman_v_superman.save!
+
 end

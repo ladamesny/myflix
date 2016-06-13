@@ -1,0 +1,9 @@
+%article.review
+  %li.row
+    .col-sm-2
+      %p
+        = link_to "" do
+          %img(src="#{review.cover_img}")
+      %col = "Rating:  #{review.rating}/ 5"
+    .col-sm-8
+      %p =review.review_summary
