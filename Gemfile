@@ -23,6 +23,7 @@ end
 group :development, :test do
   gem 'pry'
   gem 'pry-nav'
+  gem 'pry-stack_explorer'
   gem 'rspec-rails', '2.99'
 end
 
