@@ -10,6 +10,13 @@ class QueueItemsController < ApplicationController
     redirect_to my_queue_path
   end
 
+  def destroy
+    queue_item = QueueItem.find(params[:id])
+    queue_item.destroy! if current_user.queue_items.include?(queue_item)
+    update_positions
+    redirect_to my_queue_path
+  end
+
   private
 
   def enqueue_video video
@@ -22,5 +29,14 @@ class QueueItemsController < ApplicationController
 
   def already_enqueued?(video)
     current_user.queue_items.map{ |queue_item| queue_item.video.id.to_i }.include?(video.id.to_i)
+  end
+
+  def update_positions
+    current_position =1
+    current_user.queue_items.each do |queue_item|
+      queue_item.position = current_position
+      queue_item.save
+      current_position+=1
+    end
   end
 end

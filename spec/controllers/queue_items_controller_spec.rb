@@ -60,4 +60,63 @@ describe QueueItemsController do
       expect(response).to redirect_to sign_in_path
     end
   end
+
+  describe "DELETE destroy" do
+    it "redirects to the my queue page" do
+      session[:user_id] = Fabricate(:user).id
+      queue_item = Fabricate(:queue_item)
+
+      delete :destroy, id: queue_item.id
+
+      expect(response).to redirect_to my_queue_path
+    end
+    it "removes the enqueued video from my queue" do
+      user = Fabricate(:user)
+      session[:user_id] = user.id
+      video = Fabricate(:video)
+      queue_item = Fabricate(:queue_item, video: video)
+
+      delete :destroy, id: queue_item.id
+
+      expect(user.queue_items.where(video: video)).to be_empty
+    end
+    it "deletes the queue item from the database" do
+      user = Fabricate(:user)
+      session[:user_id] = user.id
+      queue_item = Fabricate(:queue_item, user: user)
+
+      delete :destroy, id: queue_item.id
+
+      expect(QueueItem.count).to eq(0)
+    end
+    it "does not delete the queue item if the queue item is not in the current user's queue" do
+      marie = Fabricate(:user)
+      larry = Fabricate(:user)
+      session[:user_id] = larry.id
+      video = Fabricate(:video)
+      queue_item = Fabricate(:queue_item, video: video, user: marie)
+
+      delete :destroy, id: queue_item.id
+
+      expect(QueueItem.count).to eq(1)
+    end
+    it "updates the positions of the remaining videos in my queue" do
+      user = Fabricate(:user)
+      session[:user_id] = user.id
+      queue_item = Fabricate(:queue_item, user: user)
+      new_queue_item = Fabricate(:queue_item, user: user)
+
+      delete :destroy, id: queue_item.id
+      new_queue_item.reload
+
+      expect(new_queue_item.position).to eq(user.queue_items.count)
+    end
+    it "redirects to the sign in page for unauthenticated users" do
+      session[:user_id] = nil
+      queue_item = Fabricate(:queue_item)
+      delete :destroy, id: queue_item.id
+
+      expect(response).to redirect_to sign_in_path
+    end
+  end
 end
