@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SessionsController do
   describe "GET new" do
     it "redirects to videos_path if already signed in" do
-      session[:user_id] = Fabricate(:user).id
+      sign_in_user
       get :new
       expect(response).to redirect_to videos_path
     end
@@ -11,16 +11,15 @@ describe SessionsController do
 
   describe "POST create" do
     context "with valid attributes" do
-      before do
-        @user = Fabricate(:user)
-        post :create, email: @user.email, password: @user.password
-      end
+      let(:user) {Fabricate(:user)}
+      before {post :create, email: user.email, password: user.password}
+
       it "redirects to root_path" do
         expect(response).to redirect_to root_path
       end
 
       it "signs in the user" do
-        expect(session[:user_id]).to eq(@user.id)
+        expect(session[:user_id]).to eq(user.id)
       end
 
       it "sets the notice" do
@@ -29,29 +28,25 @@ describe SessionsController do
     end
 
     context "with invalid attribtues" do
-      before do
-        user = Fabricate(:user)
-        post :create, email: user.email, password: nil
-      end
-
+      let(:user) {Fabricate(:user)}
       it "does not set the user in the session" do
+        post :create, email: user.email, password: nil
         expect(session[:user_id]).to be_nil
       end
 
-      it "should redirect to sign in path" do
-        expect(response).to redirect_to sign_in_path
+      it "sets the error message" do
+        post :create, email: user.email, password: nil
+        expect(flash[:error]).not_to be_blank
       end
 
-      it "sets the error message" do
-        expect(flash[:error]).not_to be_blank
+      it_behaves_like "require sign in" do
+        let(:action) {post :create, email: user.email, password: nil}
       end
     end
   end
 
   describe "DELETE destroy" do
-    before do
-      session[:user_id] = Fabricate(:user).id
-    end
+    before {sign_in_user}
 
     it "removes user id from session" do
       get :destroy

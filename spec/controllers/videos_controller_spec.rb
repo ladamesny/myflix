@@ -5,7 +5,7 @@ describe VideosController do
     let(:batman) { Fabricate(:video) }
 
     it "sets the @video variable for authenticated users" do
-      session[:user_id] = Fabricate(:user).id
+      sign_in_user
       get :show, id: batman.id
       expect(assigns(:video)).to eq(batman)
     end
@@ -19,7 +19,7 @@ describe VideosController do
   describe "POST search" do
     let(:batman) { Fabricate(:video, title: "Batman") }
     it "sets @results for authenticated users" do
-      session[:user_id] = Fabricate(:user).id
+      sign_in_user
       post :search, search_term: 'man'
       expect(assigns(:results)).to eq([batman])
     end
