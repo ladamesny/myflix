@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
       queue_item.update_attributes(position: index+1)
     end
   end
+
+  def enqueued_video?(video)
+    queue_items.map{|queue_item| queue_item.video}.include?(video)
+  end
 end
