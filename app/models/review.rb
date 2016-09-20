@@ -9,6 +9,10 @@ class Review < ActiveRecord::Base
 
   attr_accessor :on_my_queue_page
 
+  def cover_img
+    video.small_img
+  end
+
   private
 
   def on_my_queue_page?

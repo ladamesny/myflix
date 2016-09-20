@@ -18,4 +18,8 @@ class Video < ActiveRecord::Base
   def reviews_for_show
     reviews.order('created_at', 'desc')
   end
+
+  def genre
+    category.name
+  end
 end

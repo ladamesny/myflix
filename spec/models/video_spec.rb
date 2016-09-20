@@ -50,7 +50,14 @@ describe Video do
       Fabricate(:review, video: video, rating: 2)
 
       expect(video.average_rating).to eq((4+3+2)/3)
+    end
+  end
 
+  describe '#genre' do
+    it 'returns the category name' do
+      category = Fabricate(:category, name: "Action")
+      video = Fabricate(:video, category: category)
+      expect(video.genre).to eq('Action')
     end
   end
 end
