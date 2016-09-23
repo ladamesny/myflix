@@ -1,7 +1,6 @@
 require "spec_helper"
 
 feature "queue item management" do
-
   scenario "user adds video to queue" do
     action = Fabricate(:category)
     batman = Fabricate(:video, title: "Batman", category: action)
@@ -38,6 +37,7 @@ end
 def expect_link_not_to_be_seen(link_text)
   expect(page).not_to have_link(link_text)
 end
+
 def expect_video_to_be_in_queue video
   expect(page).to have_content(video.title)
 end
@@ -51,7 +51,7 @@ def expect_queue_item_position video, position
 end
 
 def add_video_to_queue video
-    visit root_path
-    find("a[data-video-id='#{video.id}']").click
-    click_link('+ My Queue')
+  visit root_path
+  find("a[data-video-id='#{video.id}']").click
+  click_link('+ My Queue')
 end
