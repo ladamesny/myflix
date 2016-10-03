@@ -9,14 +9,14 @@
         %th(width="20%") Followers
         %th(width="30%") Unfollow
     %tbody
-      - @relationships.each do | leader |
+      - @relationships.each do | relationship |
         %tr
           %td
-            = link_to leader do
-              %img(src="user.gravatar_img")
-            = link_to leader.full_name, user
-          %td.extra-padding =leader.queue.count
-          %td.extra-padding =leader.followers
+            = link_to user_path(relationship.leader) do
+              = image_tag relationship.leader.email
+            = link_to relationship.leader.full_name, relationship.leader
+          %td.extra-padding #{relationship.leader.queue_items.count}
+          %td.extra-padding #{relationship.leader.followers.count}
           %td.extra-padding
-            = link_to relationship_path(user), method: :delete do
+            = link_to relationship_path(relationship.leader), method: :delete do
               %i.glyphicon.glyphicon-remove

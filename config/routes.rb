@@ -15,13 +15,10 @@ Myflix::Application.routes.draw do
   get 'sign_out',      to: "sessions#destroy"
   get 'people',        to: "relationships#index"
   post "update_queue", to: "queue_items#update_queue"
+  post 'follow',       to: "relationships#create"
 
-  resources :relationships, only: [:destroy]
-  resources :users, only: [:index, :create, :show] do
-    member do
-      post 'follow'
-    end
-  end
-  resources :queue_items, only: [:create, :destroy]
-  resources :sessions, only: [:create]
+  resources :relationships, only: [:index, :destroy]
+  resources :users,         only: [:index, :create, :show]
+  resources :queue_items,   only: [:create, :destroy]
+  resources :sessions,      only: [:create]
 end
