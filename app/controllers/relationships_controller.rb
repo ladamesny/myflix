@@ -7,8 +7,8 @@ class RelationshipsController < ApplicationController
 
   def create
     @user = User.find(params[:leader_id])
-    Relationship.create(leader_id: @user.id, follower_id: current_user.id) unless current_user.already_following?(@user)
-    redirect_to user_path(@user)
+    Relationship.create(leader_id: @user.id, follower_id: current_user.id) if current_user.can_follow?(@user)
+    redirect_to relationships_path 
   end
 
   def destroy

@@ -25,10 +25,10 @@ feature "Relationships" do
     sign_in(larry)
 
     visit user_path(johnny)
-    expect(page).to have_button("Follow")
+    expect(page).to have_link("Follow")
 
-    click_button "Follow"
+    click_link "Follow"
 
-    expect(page).to have_button("Following")
+    expect(page).to have_content(johnny.full_name)
   end
 end

@@ -41,6 +41,16 @@ describe RelationshipsController do
       post :create, leader_id: johnny
       expect(Relationship.where(leader_id: johnny.id, follower_id: larry.id).count).to eq(1)
     end
+    it "does not allow a user to follow itself" do
+      post :create, leader_id: larry.id
+
+      expect(larry.leaders).not_to include(larry)
+    end
+
+    it "redirects the user to the relationships path" do
+      post :create, leader_id: johnny
+      expect(response).to redirect_to relationships_path
+    end
   end
 
   describe "DELETE destroy" do

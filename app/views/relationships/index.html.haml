@@ -18,5 +18,5 @@
           %td.extra-padding #{relationship.leader.queue_items.count}
           %td.extra-padding #{relationship.leader.followers.count}
           %td.extra-padding
-            = link_to relationship_path(relationship.leader), method: :delete do
+            = link_to relationship_path(relationship), method: :delete do
               %i.glyphicon.glyphicon-remove

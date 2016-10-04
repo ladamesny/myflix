@@ -33,4 +33,16 @@ describe User do
       expect(user.video_collection).to match_array([batman, superman, spiderman])
     end
   end
+
+  describe '#can_follow?' do
+    let(:larry)  { Fabricate(:user) }
+    let(:johnny) { Fabricate(:user) }
+
+    it "returns false if already following the user" do
+      Fabricate(:relationship, leader_id: johnny.id, follower_id: larry.id) 
+      expect(larry.can_follow?(johnny)).to be_false
+    end
+    it "returns false if the user is current user"
+    it "returns true if not following the user"
+  end
 end
