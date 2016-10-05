@@ -42,7 +42,13 @@ describe User do
       Fabricate(:relationship, leader_id: johnny.id, follower_id: larry.id) 
       expect(larry.can_follow?(johnny)).to be_false
     end
-    it "returns false if the user is current user"
-    it "returns true if not following the user"
+
+    it "returns false if the user is current user" do
+      expect(larry.can_follow?(larry)).to be_false
+    end
+
+    it "returns true if not following the user" do
+      expect(larry.can_follow?(johnny)).to be_true
+    end
   end
 end

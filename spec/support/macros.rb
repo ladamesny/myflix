@@ -17,3 +17,7 @@ def sign_in(a_user=nil)
   fill_in "password", with: user.password
   click_button "Sign in"
 end
+
+def click_on_video_on_home_page(video)
+  find("a[data-video-id='#{video.id}']").click
+end

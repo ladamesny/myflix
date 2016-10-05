@@ -52,6 +52,6 @@ end
 
 def add_video_to_queue video
   visit root_path
-  find("a[data-video-id='#{video.id}']").click
+  click_on_video_on_home_page(video)
   click_link('+ My Queue')
 end
